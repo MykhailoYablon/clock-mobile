@@ -4,34 +4,36 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import com.example.clock.ui.theme.ClockMobileTheme
-import com.example.clock.AnalogClockComposable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import java.text.SimpleDateFormat
-import java.util.*
+import com.example.clock.ui.theme.ClockMobileTheme
 import kotlinx.coroutines.delay
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,11 +48,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun getSharedGradient(): Brush {
-    return Brush.horizontalGradient(
+    return Brush.verticalGradient(
         colors = listOf(
-            Color(0xFF42A5F5), // Blue
-            Color(0xFFAB47BC), // Purple
-            Color(0xFFFF7043)  // Orange
+            Color(0xFF3F51B5), // Blue
+            Color(0xFF673AB7), // Purple
+            Color(0x6B6C43FF)
         )
     )
 }
@@ -61,14 +63,14 @@ fun MainScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF121212))
+            .background(brush = getSharedGradient())
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Modern Clock",
-            color = Color.White,
+            text = "Analog Clock",
+            color = Color.Black,
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 32.dp)
@@ -79,17 +81,13 @@ fun MainScreen() {
                 .shadow(
                     elevation = 16.dp,
                     shape = CircleShape,
-                    ambientColor = Color(0xFF4CAF50),
-                    spotColor = Color(0xFF4CAF50)
+                    ambientColor = Color(0xFF673AB7),
+                    spotColor = Color(0xFF673AB7)
                 )
         )
 
-        Text(
-            text = "Swipe to customize",
-            color = Color.Gray,
-            fontSize = 14.sp,
-            modifier = Modifier.padding(top = 16.dp)
-        )
+        Spacer(modifier = Modifier.height(32.dp))
+        DigitalTimeDateComposable()
     }
 }
 
@@ -106,5 +104,10 @@ fun DigitalTimeDateComposable() {
     val dateFormat = remember { SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) }
     val timeString = timeFormat.format(now)
     val dateString = dateFormat.format(now)
-    Text("$timeString - $dateString", color = Color.White)
+    Text("$timeString - $dateString",
+        color = Color.Black,
+        fontSize = 26.sp,
+        fontWeight = FontWeight.Bold,)
+
 }
+

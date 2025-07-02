@@ -74,7 +74,7 @@ fun ModernAnalogClock(
             drawCircle(
                 brush = Brush.linearGradient(
                     colors = listOf(
-                        Color(0xFF2E2E2E),
+                        Color(0xFF673AB7),
                         Color(0xFF1A1A1A)
                     )
                 ),
@@ -102,7 +102,7 @@ fun ModernAnalogClock(
                 val endY = center.y + sin(angle).toFloat() * endRadius
 
                 drawLine(
-                    color = Color(0xFF4CAF50),
+                    color = Color(0xFF673AB7),
                     start = Offset(startX, startY),
                     end = Offset(endX, endY),
                     strokeWidth = 4.dp.toPx(),
@@ -123,7 +123,7 @@ fun ModernAnalogClock(
                     val endY = center.y + sin(angle).toFloat() * endRadius
 
                     drawLine(
-                        color = Color(0xFF666666),
+                        color = Color(0xFF673AB7),
                         start = Offset(startX, startY),
                         end = Offset(endX, endY),
                         strokeWidth = 1.dp.toPx()
@@ -152,7 +152,7 @@ fun ModernAnalogClock(
             val minuteEndY = center.y + sin(minuteAngleRad).toFloat() * minuteHandLength
 
             drawLine(
-                color = Color(0xFF4CAF50),
+                color = Color(0xFF673AB7),
                 start = center,
                 end = Offset(minuteEndX, minuteEndY),
                 strokeWidth = 6.dp.toPx(),
@@ -171,7 +171,7 @@ fun ModernAnalogClock(
             val tailEndY = center.y - sin(secondAngleRad).toFloat() * tailLength
 
             drawLine(
-                color = Color(0xFFFF5722),
+                color = Color(0xFF673AB7),
                 start = Offset(tailEndX, tailEndY),
                 end = Offset(secondEndX, secondEndY),
                 strokeWidth = 2.dp.toPx(),
@@ -186,40 +186,16 @@ fun ModernAnalogClock(
             )
 
             drawCircle(
-                color = Color(0xFF4CAF50),
+                color = Color(0xFF673AB7),
                 radius = 8.dp.toPx(),
                 center = center
             )
 
             drawCircle(
-                color = Color(0xFFFF5722),
+                color = Color.Black,
                 radius = 4.dp.toPx(),
                 center = center
             )
         }
-
-
-    }
-
-    Box(
-        contentAlignment = Alignment.Center
-    ) {
-
-        Spacer(modifier = Modifier.height(50.dp))
-
-        // Digital time display at bottom
-        Text(
-            text = String.format(Locale.ROOT, "%02d:%02d:%02d",
-                calendar.get(Calendar.HOUR_OF_DAY),
-                minutes,
-                seconds
-            ),
-            color = Color(0xFF4CAF50),
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .offset(y = (-20).dp)
-        )
     }
 }
