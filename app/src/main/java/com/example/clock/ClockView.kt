@@ -1,3 +1,4 @@
+// DEPRECATED: This class is no longer used after migration to Jetpack Compose.
 package com.example.clock
 
 import android.content.Context
