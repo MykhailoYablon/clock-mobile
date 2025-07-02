@@ -1,9 +1,27 @@
+package com.example.clock
+
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.delay
+import java.util.*
+import kotlin.math.*
 
 @Composable
 fun ModernAnalogClock(
     modifier: Modifier = Modifier,
-    size: Dp = 300.dp
+    clockSize: Dp = 300.dp
 ) {
     var currentTime by remember { mutableStateOf(System.currentTimeMillis()) }
 
@@ -43,7 +61,7 @@ fun ModernAnalogClock(
     )
 
     Box(
-        modifier = modifier.size(size),
+        modifier = modifier.size(clockSize),
         contentAlignment = Alignment.Center
     ) {
         Canvas(
@@ -180,9 +198,18 @@ fun ModernAnalogClock(
             )
         }
 
+
+    }
+
+    Box(
+        contentAlignment = Alignment.Center
+    ) {
+
+        Spacer(modifier = Modifier.height(50.dp))
+
         // Digital time display at bottom
         Text(
-            text = String.format("%02d:%02d:%02d",
+            text = String.format(Locale.ROOT, "%02d:%02d:%02d",
                 calendar.get(Calendar.HOUR_OF_DAY),
                 minutes,
                 seconds
@@ -196,64 +223,3 @@ fun ModernAnalogClock(
         )
     }
 }
-
-// Usage example in your Activity/Fragment:
-@Composable
-fun ClockScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFF121212))
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = "Modern Clock",
-            color = Color.White,
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 32.dp)
-        )
-
-        ModernAnalogClock(
-            modifier = Modifier
-                .shadow(
-                    elevation = 16.dp,
-                    shape = CircleShape,
-                    ambientColor = Color(0xFF4CAF50),
-                    spotColor = Color(0xFF4CAF50)
-                )
-        )
-
-        Spacer(modifier = Modifier.height(32.dp))
-
-        Text(
-            text = "Swipe to customize",
-            color = Color.Gray,
-            fontSize = 14.sp,
-            modifier = Modifier.padding(top = 16.dp)
-        )
-    }
-}
-
-// Required imports:
-import androidx.compose.animation.core.*
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.*
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import kotlinx.coroutines.delay
-import java.util.*
-import kotlin.math.*

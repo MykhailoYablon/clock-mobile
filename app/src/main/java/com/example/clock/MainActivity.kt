@@ -84,8 +84,6 @@ fun MainScreen() {
                 )
         )
 
-        Spacer(modifier = Modifier.height(32.dp))
-
         Text(
             text = "Swipe to customize",
             color = Color.Gray,
