@@ -21,7 +21,8 @@ import kotlin.math.*
 @Composable
 fun ModernAnalogClock(
     modifier: Modifier = Modifier,
-    clockSize: Dp = 300.dp
+    clockSize: Dp = 300.dp,
+    color: Color
 ) {
     var currentTime by remember { mutableStateOf(System.currentTimeMillis()) }
 
@@ -192,7 +193,7 @@ fun ModernAnalogClock(
             )
 
             drawCircle(
-                color = Color.Black,
+                color = Color(0xFF2F3D3F),
                 radius = 4.dp.toPx(),
                 center = center
             )

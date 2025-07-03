@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -31,7 +30,6 @@ import androidx.compose.ui.unit.sp
 import com.example.clock.ui.theme.ClockMobileTheme
 import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -60,6 +58,13 @@ fun getSharedGradient(): Brush {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
+
+    val darkGreen = Color(0xFF2F3D3F) // Dark gray-green like Casio
+    val violet = Color(0xFF3F51B5)
+    val lightViolet = Color(0xFF673AB7)
+    val darkBlue = Color(0x6B6C43FF)
+    val green = Color(0xFF90EE90) // Light green LCD color
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -71,7 +76,7 @@ fun MainScreen() {
         Text(
             text = "Analog Clock",
             color = Color.Black,
-            fontSize = 24.sp,
+            fontSize = 34.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 32.dp)
         )
@@ -81,13 +86,19 @@ fun MainScreen() {
                 .shadow(
                     elevation = 16.dp,
                     shape = CircleShape,
-                    ambientColor = Color(0xFF673AB7),
-                    spotColor = Color(0xFF673AB7)
-                )
+                    ambientColor = lightViolet,
+                    spotColor = lightViolet
+                ),
+            color = lightViolet
         )
 
         Spacer(modifier = Modifier.height(32.dp))
-        DigitalTimeDateComposable()
+
+
+        //Add logic to choose between
+        //AdvancedCasioDigitalClock()
+        //DigitalTimeDateComposable()
+        CasioDigitalTimeDateComposable(lightViolet)
     }
 }
 
@@ -104,10 +115,11 @@ fun DigitalTimeDateComposable() {
     val dateFormat = remember { SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) }
     val timeString = timeFormat.format(now)
     val dateString = dateFormat.format(now)
-    Text("$timeString - $dateString",
+    Text(
+        "$timeString - $dateString",
         color = Color.Black,
         fontSize = 26.sp,
-        fontWeight = FontWeight.Bold,)
-
+        fontWeight = FontWeight.Bold,
+    )
 }
 
